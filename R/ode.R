@@ -1,7 +1,8 @@
-## CR model
-## Type I Functional Response
-
-cr_type_1 <- odin({
+#' CR model
+#' Type I Functional Response
+#' @export cr_ode_1
+#'
+cr_ode_1 <- odin({
     deriv(R) <- r * R * (1 - R/K) - a * R * C
     deriv(C) <- e * a * R * C - m * C
     initial(R) <- R0
@@ -17,9 +18,10 @@ cr_type_1 <- odin({
 }, verbose=FALSE)
 
 
-## CR model
-## Type II Functional Response
-
+#' CR model
+#' Type II Functional Response
+#' @export cr_ode_2
+#'
 cr_type_2 <- odin({
     deriv(R) <- r * R * (1 - R/K) - a/(1 + a * h * R) * R * C
     deriv(C) <- e * a /(1 + a * h * R) * R * C - m * C
@@ -37,10 +39,11 @@ cr_type_2 <- odin({
 }, verbose=FALSE)
 
 
-## CR model
-## Type III Functional Response
-
-cr_type_3 <- odin({
+#' CR model
+#' Type III Functional Response
+#' @export cr_ode_3
+#'
+cr_ode_3 <- odin({
     deriv(R) <- r * R * (1 - R/K) - a/(1 + a * h * R^2) * R^2 * C
     deriv(C) <- e * a /(1 + a * h * R^2) * R^2 * C - m * C
     initial(R) <- R0

@@ -1,0 +1,13 @@
+Package: tsr
+Type: Package
+Title: Temperature and size dependence of consumer resource models
+Version: 0.0.1
+Date: 2016-06-06
+Author: Matthew Pennell, Matthew Barbour
+Maintainer: Matthew Pennell <mwpennell@gmail.com>
+Description: TSR stuff
+License: GPL-2 | GPL-3
+Imports:
+    odin
+Suggests:
+    testthat
