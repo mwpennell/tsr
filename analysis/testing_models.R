@@ -1,5 +1,12 @@
 ## # Consumer resource dynamics with TSR
-library(tsr)
+## library(tsr)
+
+## *Currently something weird is up with the installation. Need to fix. For now I'll just source all the functions directly*
+## devtools::install_github("richfitz/odin")
+library(odin)
+source("../R/summary.R")
+source("../R/ode.R")
+source("../R/pars.R")
 
 ## ## Standard consumer resource models (no mass or temperature dependency)
 
