@@ -5,7 +5,7 @@
 \title{Function for getting temp dependent parameters
 Standardized to some arbitrary value (here 15C)}
 \usage{
-pars_temp(t, stnd = 15)
+pars_temp(t, t_stnd = 15)
 }
 \description{
 Function for getting temp dependent parameters

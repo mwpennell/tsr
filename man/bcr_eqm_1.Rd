@@ -5,7 +5,7 @@
 \title{Calculate bcr at equilbrium
 Type I Functional Response}
 \usage{
-bcr_eqm_1(K, a, m, e)
+bcr_eqm_1(m, a, e, K)
 }
 \description{
 Calculate bcr at equilbrium

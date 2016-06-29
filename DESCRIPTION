@@ -7,7 +7,7 @@ Author: Matthew Pennell, Matthew Barbour
 Maintainer: Matthew Pennell <mwpennell@gmail.com>
 Description: TSR stuff
 License: GPL-2 | GPL-3
-Imports:
+Depends:
     odin
 Suggests:
     testthat
