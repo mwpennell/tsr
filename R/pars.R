@@ -15,13 +15,13 @@ pars_mass <- function(M){
 #'
 #' @export pars_temp
 #'
-pars_temp <- function(t, stnd=15){
+pars_temp <- function(t, t_stnd=15){
     const <- temp_const()
     stnd  <- temp_stnd()
-    r <- r_temp(t, const, t_std=stnd, value_std=stnd$r)
-    K <- K_temp(t, const, t_std=stnd, value_std=stnd$K)
-    m <- m_temp(t, const, t_std=stnd, value_std=stnd$m)
-    a <- a_temp(t, const, t_std=stnd, value_std=stnd$a)
+    r <- r_temp(t, const, t_std=t_stnd, value_std=stnd$r)
+    K <- K_temp(t, const, t_std=t_stnd, value_std=stnd$K)
+    m <- m_temp(t, const, t_std=t_stnd, value_std=stnd$m)
+    a <- a_temp(t, const, t_std=t_stnd, value_std=stnd$a)
     list(r=r,K=K,m=m,a=a)
 }
 
@@ -41,25 +41,30 @@ temp_stnd <- function(){
          m=0.6,
          a=1)}
 
-r_temp <- function(t, x, t_std, value_std){
-    r0 <- value_std / exp(-x$eb/(x$k * (273.15 + t_std)))
-    r0 * exp(-x$eb/(x$k * (273.15 + t)))
-}
+r_temp <- function(t, x, t_std, value_std)
+    value_std / tfx_r(x, t_std) * tfx_r(x, t)
 
-K_temp <- function(t, x, t_std, value_std){
-    K0 <- value_std * exp(x$eb / (x$k + (273.15 + t_std))) / exp(x$es / (x$k + (273.15 + t_std)))
-    K0 / exp(x$eb / (x$k + (273.15 + t))) * exp(x$es / (x$k + (273.15 + t)))
-}
+tfx_r <- function(x, t)
+    exp(-x$eb / x$k / (273.15 + t))
 
-m_temp <- function(t, x, t_std, value_std){
-    m0 <- value_std / exp(-x$em/(x$k * (273.15 + t_std)))
-    m0 * exp(-x$em/(x$k * (273.15 + t)))
-}
+K_temp <- function(t, x, t_std, value_std)
+   value_std / tfx_K(x, t_std) * tfx_K(x, t)
 
-a_temp <- function(t, x, t_std, value_std){
-    a0 <- value_std / sqrt(x$v_c * exp(-2 * x$ev_c/(x$k * (273.15 + t_std))) +
-                           x$v_r * exp(-2 * x$ev_r/(x$k + (273.15 + t_std))))
-    a0 * sqrt(x$v_c * exp(-2 * x$ev_c/(x$k * (273.15 + t))) +
-              x$v_r * exp(-2 * x$ev_r/(x$k + (273.15 + t))))
-}
+tfx_K <- function(x, t)
+    exp(x$eb / x$k / (273.15 + t) - x$es / x$k / (273.15 + t))
+
+m_temp <- function(t, x, t_std, value_std)
+    value_std / tfx_m(x, t_std) * tfx_m(x, t)
+
+tfx_m <- function(x, t)
+    exp(-x$em / x$k / (273.15 + t))
+
+a_temp <- function(t, x, t_std, value_std)
+    value_std / tfx_a(x, t_std) * tfx_a(x,t)
+
+tfx_a <- function(x, t)
+    sqrt(x$v_c^2 * exp(-2 * x$ev_c / x$k / (273.15 + t)) +
+                       x$v_r^2 * exp(-2 * x$ev_r / x$k / (273.15 + t)))
+
+
 
