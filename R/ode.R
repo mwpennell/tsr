@@ -22,7 +22,7 @@ cr_ode_1 <- odin({
 #' Type II Functional Response
 #' @export cr_ode_2
 #'
-cr_type_2 <- odin({
+cr_ode_2 <- odin({
     deriv(R) <- r * R * (1 - R/K) - a/(1 + a * h * R) * R * C
     deriv(C) <- e * a /(1 + a * h * R) * R * C - m * C
     initial(R) <- R0
